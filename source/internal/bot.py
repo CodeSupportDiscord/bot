@@ -12,7 +12,7 @@ class Bot(commands.Bot):
         intents = Intents.all()
 
         super().__init__(
-            command_prefix=self.get_prefix,
+            command_prefix="!",
             intents=intents,
             *args,
             **kwargs,
@@ -35,8 +35,3 @@ class Bot(commands.Bot):
         self.http_session = ClientSession()
 
         await super().login(*args, **kwargs)
-
-    async def get_prefix(self, message: Message) -> str:
-        """Get a dynamic prefix for the bot."""
-
-        return ">"
