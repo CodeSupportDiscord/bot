@@ -20,7 +20,7 @@ class Bot(commands.Bot):
         )
 
         self.http_session: Optional[ClientSession] = None
-        self.cache = RedisSession()
+        self.cache = RedisSession(address="redis://127.0.0.1")
 
     def load_extensions(self, *exts):
         """Load a set of extensions."""

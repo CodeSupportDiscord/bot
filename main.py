@@ -9,6 +9,7 @@ bot = Bot()
 
 bot.load_extensions(
     "jishaku",
+    "source.cogs.rooms",
 )
 
 bot.run(getenv("TOKEN"))
