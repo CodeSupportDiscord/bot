@@ -25,9 +25,9 @@ class Bot(commands.Bot):
         for ext in exts:
             try:
                 self.load_extension(f"cogs.{ext}")
-                self.logger.info(f"Loaded cog cogs.{ext}")
+                print(f"Loaded cog cogs.{ext}")
             except Exception:
-                self.logger.error(f"Failed to load cog: cogs.{ext}: {format_exc()}")
+                print(f"Failed to load cog: cogs.{ext}: {format_exc()}")
 
     async def login(self, *args, **kwargs) -> None:
         """Create the aiohttp ClientSession before logging in."""
