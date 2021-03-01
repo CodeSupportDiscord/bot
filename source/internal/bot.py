@@ -21,13 +21,13 @@ class Bot(commands.Bot):
         self.http_session: Optional[ClientSession] = None
 
     def load_extensions(self, *exts):
-        """Load a set of extensions, autoprefixed by 'cogs.'"""
+        """Load a set of extensions."""
         for ext in exts:
             try:
-                self.load_extension(f"cogs.{ext}")
-                print(f"Loaded cog cogs.{ext}")
+                self.load_extension(ext)
+                print(f"Loaded cog {ext}")
             except Exception:
-                print(f"Failed to load cog: cogs.{ext}: {format_exc()}")
+                print(f"Failed to load cog: {ext}: {format_exc()}")
 
     async def login(self, *args, **kwargs) -> None:
         """Create the aiohttp ClientSession before logging in."""
