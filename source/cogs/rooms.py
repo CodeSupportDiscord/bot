@@ -49,7 +49,7 @@ class Rooms(commands.Cog):
 
         message = await channel.send(f"This help room has been created for {ctx.author.mention} - please read <#816027169612234762> before helping.")
         await message.pin()
-        await ctx.message.add_reaction("👍")
+        await ctx.message.add_reaction("✅")
 
     @commands.command(name="close")
     @is_own_room()
