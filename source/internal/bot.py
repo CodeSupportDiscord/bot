@@ -1,8 +1,9 @@
 from discord.ext import commands
-from discord import Message, Intents
+from discord import Intents
 from aiohttp import ClientSession
 from typing import Optional
 from traceback import format_exc
+from async_rediscache import RedisSession
 
 
 class Bot(commands.Bot):
@@ -19,6 +20,7 @@ class Bot(commands.Bot):
         )
 
         self.http_session: Optional[ClientSession] = None
+        self.cache = RedisSession()
 
     def load_extensions(self, *exts):
         """Load a set of extensions."""
@@ -33,5 +35,14 @@ class Bot(commands.Bot):
         """Create the aiohttp ClientSession before logging in."""
 
         self.http_session = ClientSession()
+        await self.cache.connect()
 
         await super().login(*args, **kwargs)
+
+    async def logout(self, *args, **kwargs) -> None:
+        """Close the aiohttp ClientSession and redis cache."""
+
+        await self.http_session.close()
+        await self.cache.close()
+
+        await super().logout(*args, **kwargs)
