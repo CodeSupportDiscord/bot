@@ -45,7 +45,7 @@ class Rooms(commands.Cog):
             return await ctx.send("The bot isn't ready to handle your request, please try again in a few seconds.")
 
         def check(reaction, user):
-            return user == ctx.author and str(reaction.emoji) in ["✅", "🛑"]
+            return user.id == ctx.author.id and str(reaction.emoji) in ["✅", "🛑"]
 
         message = await ctx.send("Are you sure you want to create a help room?")
         await message.add_reaction("✅")
