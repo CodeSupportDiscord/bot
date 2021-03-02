@@ -5,6 +5,8 @@ from typing import Optional
 from traceback import format_exc
 from async_rediscache import RedisSession
 
+from .help import Help
+
 
 class Bot(commands.Bot):
     """A subclass of `commands.Bot` with additional features."""
@@ -15,6 +17,7 @@ class Bot(commands.Bot):
         super().__init__(
             command_prefix="!",
             intents=intents,
+            help_command=Help(),
             *args,
             **kwargs,
         )
