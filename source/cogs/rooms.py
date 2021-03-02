@@ -44,6 +44,21 @@ class Rooms(commands.Cog):
         if not self.ready:
             return await ctx.send("The bot isn't ready to handle your request, please try again in a few seconds.")
 
+        def check(reaction, user):
+            return user == ctx.author and str(reaction.emoji) in ["✅", "🛑"]
+
+        message = await ctx.send("Are you sure you want to create a help room?")
+        await message.add_reaction("✅")
+        await message.add_reaction("🛑")
+
+        try:
+            reaction, _ = await self.bot.wait_for("reaction", check=check, timeout=30)
+        except:
+            return await message.edit(content="Help room creation cancelled.")
+
+        if str(reaction.emoji) != "✅":
+            return await message.edit(content="Help room creation cancelled.")
+
         channel = await self.cat.create_text_channel(name=str(ctx.author))
         await self.cache.set(ctx.author.id, channel.id)
 
