@@ -15,6 +15,7 @@ def has_no_room():
 
 def is_own_room():
     async def predicate(ctx: commands.Context):
+        if ctx.author.guild_permissions.manage_messages: return True
         user_room = await ctx.cog.cache.get(ctx.author.id)
         return bool(user_room)
     return commands.check(predicate)
